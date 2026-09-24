@@ -29,8 +29,6 @@ def load_model():
             return tf.keras.models.load_model(path)
     raise FileNotFoundError("Model file not found")
 
-model = load_model()
-
 # Class names
 CLASS_NAMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
@@ -54,6 +52,7 @@ uploaded_file = st.file_uploader(
 if uploaded_file is not None:
     # Load and display image
     image = Image.open(uploaded_file).convert("RGB")
+    model = load_model()
     
     col1, col2 = st.columns(2)
     with col1:
