@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 from PIL import Image
-import tensorflow as tf
 import os
 
 # Page config
@@ -18,6 +17,8 @@ st.markdown("*Real-Time Sign Language Recognition*")
 # Load model (cached)
 @st.cache_resource
 def load_model():
+    import tensorflow as tf
+
     # Try multiple paths for flexibility
     possible_paths = [
         "models/baseline_cnn_final.keras",
