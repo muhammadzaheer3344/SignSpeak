@@ -1,0 +1,20 @@
+# Local training and evaluation data
+data/
+checkpoints/
+logs/
+reports/
+
+# Notebooks and generated files
+*.ipynb
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local archives and editor files
+*.zip
+.DS_Store
+.vscode/
+
+# TensorFlow and Streamlit local state
+.keras/
+.streamlit/secrets.toml
