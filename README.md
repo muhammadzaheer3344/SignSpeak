@@ -52,8 +52,8 @@ classes. The reported validation accuracy is 96.59%.
 2. Choose `app.py` as the main file.
 3. Deploy with the default Python environment.
 
-The repository pins Python 3.12 in `.python-version` because TensorFlow does
-not yet provide a stable wheel for Python 3.14. The model is loaded from
+The deployment uses the TensorFlow release candidate that provides a wheel for
+Streamlit Cloud's Python 3.14 runtime. The model is loaded from
 `models/baseline_cnn_final.keras`.
 
 MIT
