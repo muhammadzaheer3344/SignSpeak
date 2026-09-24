@@ -19,6 +19,8 @@ SignSpeak recognizes **29 ASL classes** (A-Z + del + nothing + space) from hand 
 Streamlit image classifier for 29 American Sign Language classes: A-Z, `del`,
 `nothing`, and `space`.
 
+**Live app:** https://signspeak-9vjpjaaeb58f3i2vitdtqi.streamlit.app
+
 ## Run Locally
 
 ```bash
