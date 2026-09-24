@@ -17,18 +17,15 @@ st.markdown("*Real-Time Sign Language Recognition*")
 # Load model (cached)
 @st.cache_resource
 def load_model():
-    import tensorflow as tf
+    from ai_edge_litert.interpreter import Interpreter
 
-    # Try multiple paths for flexibility
-    possible_paths = [
-        "models/baseline_cnn_final.keras",
-        "checkpoints/baseline_cnn_best.keras",
-        "baseline_cnn_best.keras",
-    ]
-    for path in possible_paths:
-        if os.path.exists(path):
-            return tf.keras.models.load_model(path)
-    raise FileNotFoundError("Model file not found")
+    model_path = "models/baseline_cnn_final.tflite"
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file not found: {model_path}")
+
+    interpreter = Interpreter(model_path=model_path)
+    interpreter.allocate_tensors()
+    return interpreter
 
 # Class names
 CLASS_NAMES = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -66,7 +63,11 @@ if uploaded_file is not None:
     
     # Predict
     with st.spinner("Classifying..."):
-        predictions = model.predict(img_array, verbose=0)[0]
+        input_details = model.get_input_details()[0]
+        output_details = model.get_output_details()[0]
+        model.set_tensor(input_details["index"], img_array.astype(np.float32))
+        model.invoke()
+        predictions = model.get_tensor(output_details["index"])[0]
         pred_idx = np.argmax(predictions)
         pred_class = CLASS_NAMES[pred_idx]
         confidence = predictions[pred_idx]
